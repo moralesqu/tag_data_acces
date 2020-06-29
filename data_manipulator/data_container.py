@@ -13,10 +13,13 @@ class DataContainer:
         self.load_data_from_file(file_name)
 
     def load_data_from_file(self, file_name: str) -> None:
-        if not os.path.isfile(config.TAG_DATA_DICTIONARY + file_name):
+        if not os.path.isfile(config.TAG_DATA_DIRECTORY + file_name):
             self.logger.info("No file with name: '{}' to load data".format(file_name))
             return
-        data_file = open(config.TAG_DATA_DICTIONARY + file_name)
+        if os.stat(config.TAG_DATA_DIRECTORY + file_name).st_size == 0:
+            self.logger.debug("File: '{}' exist, but it is empty".format(file_name))
+            return
+        data_file = open(config.TAG_DATA_DIRECTORY + file_name)
         self.tag_data = json.load(data_file)
 
     def add_if_new(self, tag_id: str, timestamp: int) -> None:
@@ -30,5 +33,7 @@ class DataContainer:
         self.tag_data[tag_id].append(timestamp)
         self.logger.debug("New measure for tag: {}".format(tag_id))
 
-    def print_data(self):
-        print(self.tag_data)
+    def save_to_file(self) -> None:
+        data_file = open(config.TAG_DATA_DIRECTORY + self.file_name, 'w')
+        json.dump(self.tag_data, data_file)
+
