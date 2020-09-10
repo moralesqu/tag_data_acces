@@ -1,0 +1,40 @@
+@import "src/styles/theme";
+
+.search-container {
+  display: inline-flex;
+  border-bottom: black 1px solid;
+  width: 0;
+  //visibility: hidden;
+  transition: width 0.3s ease-in-out, margin-right 0.3s ease-in-out;
+
+  &.visible {
+    width: 130px;
+    margin-right: 5px;
+  }
+
+  .search-input {
+    border: 0;
+    background: none;
+    outline: none;
+    width: 100%;
+  }
+
+  .clear-input-button {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 10px;
+    padding: 0;
+    margin: 0;
+    color: gray;
+    border: 0;
+    outline: none;
+    background: none;
+    visibility: hidden;
+    cursor: pointer;
+
+    &.visible {
+      visibility: visible;
+    }
+  }
+}

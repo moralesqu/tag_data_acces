@@ -1,0 +1,51 @@
+<mat-toolbar color="primary">
+    <button *ngIf="isSideNavigationActive"
+            type="button"
+            aria-label="Toggle sidenav"
+            mat-icon-button
+            style="margin-left: -7px"
+            (click)="menuButtonSlot()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <img class="nav-element" src="assets/images/logo.png" style="height: 80%; margin-left: 12px;">
+    <span *ngIf="!(isHandset$ | async)" class="nav-element">Personal Best</span>
+    <ng-container *ngIf="!(isHandset$ | async); else navToolbarHandset">
+        <ng-content select=".select-nav-toolbar"></ng-content>
+    </ng-container>
+</mat-toolbar>
+<mat-sidenav-container [class.sidenav-container]="!(isHandset$ | async)">
+    <mat-sidenav #drawer class="sidenav"
+                 [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                 [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                 [fixedInViewport]="(isHandset$ | async)" [fixedTopGap]="(isHandset$ | async) ? 0 : 56"
+                 [disableClose]="isSideNavigationActive && !(isHandset$ | async)"
+                 [opened]="isSideNavigationActive &&!(isHandset$ | async)"
+                 [class.open]="isExpanded">
+        <mat-toolbar *ngIf="isHandset$ | async" color="primary">Menu</mat-toolbar>
+        <div class="sidenav-list">
+            <app-sidenav-element style="width: 100%;"
+                                 [isExpanded]="isExpanded"
+                                 [isActive]="isHomePageActive"
+                                 [label]="'Strona główna'"
+                                 [matIcon]="'home'"
+                                 (click)="homeSlot()">
+            </app-sidenav-element>
+            <ng-content select=".select-nav-sideMenu"></ng-content>
+            <app-sidenav-element style="width: 100%;"
+                                 [isExpanded]="isExpanded"
+                                 [label]="'Wyloguj'"
+                                 [matIcon]="'exit_to_app'"
+                                 (click)="logoutSlot()">
+            </app-sidenav-element>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content [class.sidenav-content]="isSideNavigationActive"
+                         [class.half-sidenav]="!(isHandset$ | async)"
+                         [class.open-sidenav]="!(isHandset$ | async) && isExpanded" role="main">
+        <ng-content select=".select-nav-body"></ng-content>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<ng-template #navToolbarHandset>
+    <ng-content select=".select-nav-toolBar-handset"></ng-content>
+</ng-template>

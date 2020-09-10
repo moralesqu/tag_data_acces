@@ -1,0 +1,10 @@
+<a matRipple class="sidenav-list-element"
+   [class.center]="!isExpanded"
+   (click)="click.emit()"
+   matTooltip="Nawiguj do {{label}}"
+   [matTooltipShowDelay]="1000">
+    <mat-icon class="sidenav-icon"
+              [color]="isActive ? 'warn' : 'primary'">
+        {{matIcon}}</mat-icon>
+    <div [class.collapsed]="!isExpanded">{{label}}</div>
+</a>

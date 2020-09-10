@@ -1,0 +1,33 @@
+@import "src/styles/styles";
+@import "src/styles/navigation";
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav-content {
+  &.half-sidenav {
+    margin-left: 60px !important;
+  }
+
+  &.open-sidenav {
+    margin-left: 200px !important;
+  }
+}
+
+.sidenav {
+  width: 60px;
+
+  &.open {
+    width: 200px;
+  }
+}
+
+.mat-toolbar.mat-primary {
+  top: 0;
+  z-index: 1;
+}
+
+.hidden {
+  display: none;
+}

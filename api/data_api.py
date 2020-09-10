@@ -13,8 +13,15 @@ class Data(Resource):
     def get(self):
         result = self.data_container.get_tag_data()
         if result is not None:
+            ret = []
+            for key, value in result.items():
+                ret.append({
+                    'id': key,
+                    'timestamps': value
+                })
+
             return {
-                'data': result
+                'data': ret
             }
         else:
             return {
@@ -28,7 +35,8 @@ class DataCSV(Resource):
         self.data_container = kwargs['data_container']
 
     def get(self):
-        result = file_manipulation.get_file_as_csv(self.data_container.get_file_name())
+        # result = file_manipulation.get_file_as_csv(self.data_container.get_file_name())
+        result = file_manipulation.get_file_as_csv('tag1.json')
         if result[0]:
             return flask.Response(result[1], mimetype='text/csv')
         else:

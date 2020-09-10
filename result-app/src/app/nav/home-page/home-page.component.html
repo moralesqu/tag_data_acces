@@ -1,0 +1,13 @@
+<app-nav-bar [isHomePageActive]="true">
+    <div class="select-nav-body nav-body">
+        <div class="container"
+             (click)="router.navigate(['/result'])">
+            <mat-card class="content-tile primary clickable">
+                <mat-card-content>
+                    <mat-icon>web</mat-icon>
+                    <span>Bieżące wyniki</span>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</app-nav-bar>

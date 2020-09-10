@@ -1,0 +1,14 @@
+<button mat-raised-button color="accent"
+        class="nav-element" style="margin-left: auto; "
+        (click)="searchSlot($event)">
+    <div class="search-container"
+         [ngClass]="{'visible': searchVisible}">
+        <input class="search-input" type="text" placeholder=" Szukaj"
+               [ngModel]="searchText" (ngModelChange)="textChangedSlot($event)" #searchInput>
+        <button class="clear-input-button"
+                [ngClass]="{'visible': searchVisible && searchText}"
+                (click)="textChangedSlot(''); $event.stopPropagation();">x
+        </button>
+    </div>
+    <mat-icon>search</mat-icon>
+</button>

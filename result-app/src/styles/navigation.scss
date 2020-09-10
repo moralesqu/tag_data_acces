@@ -1,0 +1,80 @@
+@import "styles";
+
+.mat-toolbar, .nav-toolbar{
+  width: 100%;
+  display: inline-flex;
+
+  .nav-element {
+    margin-right: 10px;
+  }
+
+  .nav-element-right {
+    margin-left: auto;
+  }
+
+  .right-icon {
+    margin-left: 10px;
+    transform: scale(1.2);
+  }
+
+  .toolbar-handset-menu {
+    margin-right: -15px;
+  }
+}
+
+.nav-sideMenu {
+  width: 100%;
+}
+
+mat-sidenav-content {
+  @include sm() {
+    overflow-y: hidden;
+  }
+}
+
+.nav-body {
+  background-color: white;
+  @include sm() {
+    position: absolute;
+    height: calc(100% - 64px);
+    width: 100%;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.sidenav-icon {
+  font-size: 40px;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+.sidenav-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidenav-list-element {
+  display: flex;
+  cursor: pointer;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px 10px;
+
+  &.center {
+    justify-content: center;
+  }
+
+  .collapsed {
+    width: 0;
+    visibility: hidden;
+  }
+
+  div:not(.collapsed){
+    margin-left: 5px;
+  }
+}
