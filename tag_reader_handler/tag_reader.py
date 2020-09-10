@@ -101,3 +101,21 @@ class TagReader:
         # tag_id = llrp_msg.msgdict['RO_ACCESS_REPORT']['TagReportData']['EPCData']['EPC']
         # timestamp = llrp_msg.msgdict['RO_ACCESS_REPORT']['TagReportData']['LastSeenTimestampUTC'][0]
         return tag_id, int(timestamp)
+
+
+
+
+
+    # def tagreportcb(llrp_msg):
+    #     tags = llrp_msg.msgdict['RO_ACCESS_REPORT']['TagReportData']
+    #     tag_list = set()
+    #     for tag in tags:
+    #         tag_list.add(tag.get('EPC-96', None))
+    #     return tag_list
+    #
+    # def report(llrp_msg):
+    #     tag_list = tagreportcb(llrp_msg)
+    #     with open('tags.txt', mode='w+') as report:
+    #         for tag in tag_list:
+    #             if tag not in report.readlines():
+    #                 report.write(str(tag)[2:26] + '\n')
