@@ -51,7 +51,7 @@ export class ResultApiService {
             .subscribe((data) => {
                 this._tags.next(
                     data.data.map<TagResult>((item) =>
-                        new TagResult(item.id, item.timestamps.map<Date>((time) => new Date(time))))
+                        new TagResult(item.id, item.timestamps.map<Date>((time) => new Date(Math.round(time)))))
                 );
             });
     }

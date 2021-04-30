@@ -31,7 +31,7 @@
                 </th>
                 <td mat-cell *matCellDef="let element">
                     <ng-container *ngIf="element.time.length > 0">
-                        {{element.time[0].toLocaleString()}}
+                        {{element.getTimeAsString()[0]}}
                     </ng-container>
                 </td>
             </ng-container>
@@ -41,7 +41,7 @@
                 </th>
                 <td mat-cell *matCellDef="let element">
                     <ng-container *ngIf="element.time.length > 1">
-                        {{element.time[1].toLocaleString()}}
+                        {{element.getTimeAsString()[1]}}
                     </ng-container>
                 </td>            </ng-container>
             <ng-container matColumnDef="Lap3">
@@ -50,7 +50,7 @@
                 </th>
                 <td mat-cell *matCellDef="let element">
                     <ng-container *ngIf="element.time.length > 2">
-                        {{element.time[2].toLocaleString()}}
+                        {{element.getTimeAsString()[2]}}
                     </ng-container>
                 </td>
             </ng-container>

@@ -12,6 +12,10 @@ class TagReader:
     def __init__(self, callback_function: typing.Callable, callback_with_conversion=True):
         self.callback_function = callback_function
         self.logger = logging.getLogger('tag_data_access')
+        sllurp_logger = logging.getLogger('sllurp')
+        sllurp_logger.setLevel(logging.INFO)
+        sllurp_logger.addHandler(logging.StreamHandler())
+
         if not config.TAG_READER_IP:
             self.logger.error('Tag reader ip is missing')
             return
@@ -43,7 +47,7 @@ class TagReader:
 
         factory_args = dict(
             onFinish=d,
-            duration=10,
+            duration=None,
             report_every_n_tags=1,
             antenna_dict=antennas_map,
             tx_power=0,
@@ -62,9 +66,9 @@ class TagReader:
                 'EnableAntennaID': False,
                 'EnableChannelIndex': False,
                 'EnablePeakRSSI': False,
-                'EnableFirstSeenTimestamp': None,
+                'EnableFirstSeenTimestamp': False,
                 'EnableLastSeenTimestamp': True,
-                'EnableTagSeenCount': None,
+                'EnableTagSeenCount': False,
                 'EnableAccessSpecID': False
             },
             impinj_extended_configuration=False,
@@ -92,30 +96,23 @@ class TagReader:
 
     def callback_with_conversion(self, llrp_msg) -> None:
         converted_data = self.convert_form_llrp_msg(llrp_msg)
+        if converted_data is None:
+            return
         self.callback_function(converted_data[0], converted_data[1])
 
     @staticmethod
     def convert_form_llrp_msg(llrp_msg) -> (str, int):
-        tag_id = llrp_msg[23:31]
-        timestamp = llrp_msg[83:99]
-        # tag_id = llrp_msg.msgdict['RO_ACCESS_REPORT']['TagReportData']['EPCData']['EPC']
-        # timestamp = llrp_msg.msgdict['RO_ACCESS_REPORT']['TagReportData']['LastSeenTimestampUTC'][0]
+        print(llrp_msg.msgdict)
+
+        data = llrp_msg.msgdict['RO_ACCESS_REPORT']['TagReportData']
+        if len(data) is 0:
+            return
+        keys = data[0].keys()
+        tag_id = None
+        if 'EPCData' in keys:
+            tag_id = data[0]['EPCData']['EPC'].decode("utf-8")
+        elif 'EPC-96' in keys:
+            tag_id = data[0]['EPC-96'].decode("utf-8")
+        timestamp = round(llrp_msg.msgdict['RO_ACCESS_REPORT']['TagReportData'][0]['LastSeenTimestampUTC'][0]/1000)
+        print(timestamp)
         return tag_id, int(timestamp)
-
-
-
-
-
-    # def tagreportcb(llrp_msg):
-    #     tags = llrp_msg.msgdict['RO_ACCESS_REPORT']['TagReportData']
-    #     tag_list = set()
-    #     for tag in tags:
-    #         tag_list.add(tag.get('EPC-96', None))
-    #     return tag_list
-    #
-    # def report(llrp_msg):
-    #     tag_list = tagreportcb(llrp_msg)
-    #     with open('tags.txt', mode='w+') as report:
-    #         for tag in tag_list:
-    #             if tag not in report.readlines():
-    #                 report.write(str(tag)[2:26] + '\n')

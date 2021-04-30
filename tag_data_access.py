@@ -13,10 +13,10 @@ if __name__ == '__main__':
     logger_stream = logging.StreamHandler()
     logger.addHandler(logger_stream)
     data_container = DataContainer()
+    # data_container.load_data_from_file('tag1.json')
     tag_reader = TagReader(data_container.add_if_new)
     api_app = API(data_container)
 
-    api_thread = Thread(target=app.run)
-    api_thread.daemon = True
+    api_thread = Thread(target=app.run, daemon=True)
     api_thread.start()
     tag_reader.start_inventory()
