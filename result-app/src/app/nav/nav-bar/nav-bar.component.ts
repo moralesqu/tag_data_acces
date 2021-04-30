@@ -4,6 +4,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { AuthenticationService } from 'src/app/authentication/service/authentication.service';
 
 @Component({
     selector: 'app-nav-bar',
@@ -22,7 +23,7 @@ export class NavBarComponent {
         );
 
     constructor(private _breakpointObserver: BreakpointObserver,
-                // private _authenticationService: AuthenticationService,
+                private _authenticationService: AuthenticationService,
                 private _router: Router) {
     }
 
@@ -40,7 +41,7 @@ export class NavBarComponent {
     }
 
     public logoutSlot(): void {
-        // this._authenticationService.logout();
+        this._authenticationService.logout();
     }
 
 }

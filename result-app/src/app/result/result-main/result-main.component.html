@@ -6,7 +6,8 @@
                 (click)="downloadSlot()">
             Pobierz wyniki
             <mat-icon class="icon-add-box">save</mat-icon>
-        </button>        <app-search-button class="search-button"
+        </button>
+        <app-search-button class="search-button"
                            (searchTextChanged)="searchTextSlot($event)">
         </app-search-button>
     </div>
@@ -43,7 +44,8 @@
                     <ng-container *ngIf="element.time.length > 1">
                         {{element.getTimeAsString()[1]}}
                     </ng-container>
-                </td>            </ng-container>
+                </td>
+            </ng-container>
             <ng-container matColumnDef="Lap3">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     Okrążenie 3

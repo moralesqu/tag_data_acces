@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { TranslateModule } from '@ngx-translate/core';
 import { UtilsModule } from 'src/app/utils/utils.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -19,7 +20,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
         MatIconModule,
         MatButtonModule,
         MatCardModule,
-        UtilsModule
+        UtilsModule,
+        TranslateModule
     ],
     exports: [NavBarComponent]
 })

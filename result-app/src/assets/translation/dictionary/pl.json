@@ -1,0 +1,16 @@
+{
+  "LOGIN": {
+    "LOGIN": "Zaloguj",
+    "LOGIN_GOOGLE": "Google",
+    "EMAIL": "Email",
+    "PASSWORD": "Hasło"
+  },
+  "HOME_PAGE": {
+    "COMPETITIONS": "Zawody"
+  },
+  "COMPETITION": {
+    "MAIN": {
+      "ADD_COMPETITION": "Dodaj nowe zawody"
+    }
+  }
+}

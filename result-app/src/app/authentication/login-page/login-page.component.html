@@ -1,0 +1,33 @@
+<div class="center-card">
+    <mat-card class="login-card">
+        <mat-card-header>
+            <div class="center-image">
+                <img src="/assets/images/logo.png">
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <form name="loginForm" (ngSubmit)="login()">
+                <div [formGroup]="loginForm">
+                    <mat-form-field>
+                        <mat-label>{{ 'LOGIN.EMAIL' | translate }}:</mat-label>
+                        <input matInput formControlName="email">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>{{ 'LOGIN.PASSWORD' | translate }}:</mat-label>
+                        <input matInput formControlName="password" type="password">
+                    </mat-form-field>
+                    <div class="form-button">
+                        <button type="submit" mat-raised-button color="accent">
+                            {{ 'LOGIN.LOGIN' | translate }}
+                        </button>
+                        <button type="button" mat-raised-button color="accent"
+                                (click)="google_login()">
+                            {{ 'LOGIN.LOGIN_GOOGLE' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+

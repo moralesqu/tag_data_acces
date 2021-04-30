@@ -9,5 +9,14 @@
                 </mat-card-content>
             </mat-card>
         </div>
+        <div class="container"
+             (click)="router.navigate(['/competitions'])">
+            <mat-card class="content-tile primary clickable">
+                <mat-card-content>
+                    <mat-icon>web</mat-icon>
+                    <span>{{'HOME_PAGE.COMPETITIONS' | translate}}</span>
+                </mat-card-content>
+            </mat-card>
+        </div>
     </div>
 </app-nav-bar>

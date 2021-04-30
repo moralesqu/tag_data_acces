@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "running-tags": {
+      "hosting": {
+        "result-app": [
+          "running-tags"
+        ]
+      }
+    }
+  }
+}
